@@ -24,3 +24,17 @@ const Party &Graph::getParty(int partyId) const
 {
     return mVertices[partyId];
 }
+const vector<Party> Graph::getVertices()
+{
+    return mVertices;
+}
+vector<int> Graph::getneighbors(int partyId){
+    vector<int> mNeighbors;
+    for(int i = 0; i < mVertices.size(); i++){
+        if (mEdges[partyId][i] != 0){
+            mNeighbors.push_back(i);
+        }
+    }
+
+    return mNeighbors;
+}

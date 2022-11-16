@@ -2,27 +2,42 @@
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
-    for(int i = 0, i<agents.size();i++){
-        mCoalition[i].push_back(agents[i].partyid);
+    Simulation::mCoalition = getPartiesByCoalitions();
     }
-}
 
 void Simulation::step()
 {
-    for(int i = 0; i < graph.getNumVertices(); i++){
-        graph.getparty(i).step(*this);
+    for(int i = 0; i < mGraph.getNumVertices(); i++){
+        mGraph.getParty(i).step(*this);
     }
 
-    for(int i = 0; i < agents.size(); i++){
-        agents[i].step(*this);
+    for(int i = 0; i < mAgents.size(); i++){
+        mAgents[i].step(*this);
     }
 }
 
 bool Simulation::shouldTerminate() const
 {
-    //in here we need to check if all parties are "joined" / coalition with 61
-    // TODO implement this method
-    return true;
+    bool noCoalition = true;
+    for(int i = 0; i<mCoalition.size();i++){
+        int totalMan = 0;
+        for(int j = 0; i<mCoalition[i].size() & totalMan >= 61 ;j++){
+            totalMan += mGraph.getParty(mCoalition[i][j]).getMandates();
+        }
+            if (totalMan >= 61){
+                noCoalition = false;
+        }
+
+    }
+    vector<Party> parties = mGraph.getVertices();
+    bool joined = true;
+    for(int i = 0; i<parties.size() & joined;i++){
+        if (parties[i].getState() != Joined){
+            joined = false;
+        }
+    }
+
+    return (!noCoalition | joined);
 }
 
 const Graph &Simulation::getGraph() const
@@ -44,6 +59,12 @@ const Party &Simulation::getParty(int partyId) const
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
-    // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return mCoalition;
+        for(int i = 0; i<mAgents.size();i++){
+        vector<int> currCoalition;
+        currCoalition.push_back(mAgents[i].getPartyId());
+        mCoalition.push_back(currCoalition);
+
+    }
+    return vector < vector < int >> ();
 }
+

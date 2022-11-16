@@ -24,10 +24,13 @@ public:
     void step(Simulation &s);
     const string &getName() const;
 
+
+
 private:
     int mId;
     string mName;
     int mMandates;
     JoinPolicy *mJoinPolicy;
     State mState;
+    int iter;
 };
