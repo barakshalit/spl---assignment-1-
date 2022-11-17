@@ -24,6 +24,13 @@ public:
     void step(Simulation &s);
     const string &getName() const;
 
+    int Partycoalition;
+    void setPartyCoalition;
+    int getPartyCoalition;
+    vector<int> Partyinvitations;
+    vector<int> coaltionInv;
+
+
 
 
 private:

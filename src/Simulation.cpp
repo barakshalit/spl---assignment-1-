@@ -60,11 +60,23 @@ const Party &Simulation::getParty(int partyId) const
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
         for(int i = 0; i<mAgents.size();i++){
-        vector<int> currCoalition;
-        currCoalition.push_back(mAgents[i].getPartyId());
-        mCoalition.push_back(currCoalition);
+            mAgents[i].setAgentCoalition(i);
+            mAgents[i].getParty().setPartyCoalition(i);
+
+            vector<int> currCoalition;
+            currCoalition.push_back(mAgents[i].getPartyId());
+            mCoalition.push_back(currCoalition);
+
 
     }
+    vector<int> partyInv;
+    for(int i = 0; i< mCoalition.size();i++){
+        partyInv.push_back(0);
+    }
+    for(int i = 0; i< mGraph.getVertices().size();i++){
+        mGraph.getParty(i).coalitionInv = partyInv;
+    }
+
     return vector < vector < int >> ();
 }
 
