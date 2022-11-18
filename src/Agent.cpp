@@ -1,5 +1,7 @@
 #include "Agent.h"
 
+///my addings:
+#include "Simulation.h"
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
@@ -24,24 +26,24 @@ int Agent::getPartyId() const
 
 void Agent::step(Simulation &sim)
 {
-    vector<int> neighbors = sim.mGraph.getneighbors(this->getPartyId());
+    vector<int> neighbors = sim.getGraph().getneighbors(this->getPartyId());
     for(int i = 0; i< neighbors.size();i++){
-        if(neighbors[i] == this->getAgentCoalition() | sim.mGraph.getParty(neighbors[i]).getState() == Joined | sim.mGraph.getParty(neighbors[i]).coalitionInv[this->getAgentCoalition()] == 1){
+        if(neighbors[i] == this->getAgentCoalition() | sim.getGraph().getParty(neighbors[i]).getState() == Joined | sim.getGraph().getParty(neighbors[i]).coaltionInv[this->getAgentCoalition()] == 1){
             neighbors.erase(neighbors.begin() + i - 1);/// check what position to make?
         }
     }
-    mSelectionPolicy->choose(s,neighbors, this->getId(),this->getPartyId());
+    mSelectionPolicy->choose(sim,neighbors, this->getId(),this->getPartyId());
 
 
 
 }
 
 void Agent:: setAgentCoalition(int x){
-    this.Agentcoalition = x;
+    this->Agentcoalition = x;
 }
 
 
 int Agent::getAgentCoalition(){
-    return this.AgentCoalition;
+    return this->Agentcoalition;
 }
 

@@ -2,7 +2,7 @@
 
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
 {
-    this.iter = 0;
+    this->iter = 0;
 }
 
 State Party::getState() const
@@ -27,29 +27,29 @@ const string & Party::getName() const
 
 void Party::step(Simulation &s)
 {
-    if(this.getState() != Joined){
-       if (this.getState() == Waiting) {
+    if(this->getState() != Joined){
+       if (this->getState() == Waiting) {
            if(Partyinvitations.size() != 0){
                setState(CollectingOffers);
-               this.iter++;
+               this->iter++;
            }
        }
-       if (this.iter == 2){
-           this.iter++;
+       if (this->iter == 2){
+           this->iter++;
            ///choosing with selection policy(my party id,simuation)
        }
     }
 
 }
 
-void Party::setPartyCoalition(int x){
-    this.Partycoalition = x;
+void Party::setPartyCoalition(int coalition){
+    this->Partycoalition = coalition;
 }
 
 int Party::getPartyCoalition(){
-    return this.partyCoalition;
+    return this->Partycoalition;
 }
 
-void reciveInvitation(int partyId){
-    Partyinvitations.push_back(partyId);
+void Party::reciveInvitation(int partyId){
+    this->Partyinvitations.push_back(partyId);
 }

@@ -28,7 +28,7 @@ const vector<Party> Graph::getVertices()
 {
     return mVertices;
 }
-vector<int> Graph::getneighbors(int partyId){
+const vector<int> Graph::getneighbors(int partyId) const{
     vector<int> mNeighbors;
     for(int i = 0; i < mVertices.size(); i++){
         if (mEdges[partyId][i] != 0){
