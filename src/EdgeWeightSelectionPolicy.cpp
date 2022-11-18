@@ -3,8 +3,9 @@
 //
 
 #include "SelectionPolicy.h"
+#include "Agents.h"
 
-void EdgeWeightSelectionPolicy::choose(vector<int> x,int PartyId){
+virtual void EdgeWeightSelectionPolicy::choose(Simulation &s, vector<int> x,int selectingAgentId, int PartyId){
     int max= 0;
     int currWinner = 0;
     for(i=0;i<x.size();i++){
@@ -14,5 +15,6 @@ void EdgeWeightSelectionPolicy::choose(vector<int> x,int PartyId){
             currWinner = vector[i];
         }
     }
-    mGraph.getPartyId(winner).Partyinvitations(PartyId);
+    s.mGraph.getPartyId(winner).Partyinvitations(selectingAgentId);
+    s.mGraph.getPartyId(winner).coaltionInv[s.mGrah.getAgents()[selectingAgentId].getCoalition();
 }

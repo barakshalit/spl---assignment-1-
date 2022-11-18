@@ -24,11 +24,12 @@ public:
     void step(Simulation &s);
     const string &getName() const;
 
+    ///added members
+    void setPartyCoalition();
+    int getPartyCoalition();
     int Partycoalition;
-    void setPartyCoalition;
-    int getPartyCoalition;
-    vector<int> Partyinvitations;
-    vector<int> coaltionInv;
+    std::vector<int> Partyinvitations;
+    std::vector<int> coaltionInv; ///array of coalition that helps to see which coalitions already inv me
 
 
 
